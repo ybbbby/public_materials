@@ -1,0 +1,196 @@
+Questionnaire:
+
+Who has never used C/C++?
+Who does not know what a pointer is?
+What is a pointer?
+=> don’t solve yet
+One step back: What is a variable?
+=> A memory address
+What is a pointer?
+=> A variable that stores a memory address, e.g. another variables address
+
+
+Conclusion: A pointer is a special datatype
+What (native) data types do we know?
+What size do these data types have?
+
+
+Sample 1:
+#include <stdio.h>
+
+int main(){
+    printf("The 'char' datatype is \t %d bytes\n", sizeof(char));
+}
+
+
+Back to pointers, how long is a pointer?
+Hint: how LONG is a pointer?
+=> A pointer is a LONG (4 bytes on 32bit architectures)
+
+Sample 2:
+#include <stdio.h>
+
+int main(){
+    printf("The 'long' data type is\t\t %d bytes\n", sizeof(long)); 
+    printf("A 'long pointer' data type is\t\t %d bytes\n", sizeof(l*char)); 
+    printf("The 'char pointer' data type is\t\t %d bytes\n", sizeof(*long)); 
+}
+
+Sample 3:
+#include <stdio.h>
+
+int main(){
+    char c = “a’;
+    char *text = c;
+}
+
+| MEM ADDR  | VALUE     |
+-------------------------
+| xFFFFFFFF |           |
+-------------------------
+|    ...    |           |
+-------------------------
+| x0071AC10 |           |
+-------------------------
+| x0071AC0F |    'a'    |
+-------------------------
+| x0071AC08 | x0071AC0F |
+-------------------------
+|    ...    |           |
+-------------------------
+| x0000000F |           |
+-------------------------
+| x00000008 |           |
+-------------------------
+| x00000000 |           |
+-------------------------
+
+
+What size is c? What size is text?
+
+
+How can we read from memory in x0071AC10 and higher? (let’s say we control the code)
+=> printf(‘%d”, text+1);
+
+Exercise 1: Code a function that will give us the nth character of "Hello World".
+
+#include <stdio.h>
+
+int main(){
+    int pos;
+    char *text = “Hello World!”;
+
+    printf(“Hello World!”);
+    printf(“”which letter do you want?”);
+    scanf(“%d”,  pos);
+    printf(‘%d”, text+pos);
+}
+
+Format String
+
+Conversion Character	Displays
+%%	The percent character, %
+%c	Single character (char) value
+%d	Integer (int, short int, long int) value
+%e	Floating-point (float or double) value in scientific notation with a little E
+%E	Floating-point (float or double) value in scientific notation with a big E
+%f	Floating-point (float or double) value in decimal notation
+%g	Either %f or %e is used, depending on which is shorter
+%G	Either %F or %E is used, depending on which is shorter
+%i	Integer (int, short int, long int) value
+%o	Unsigned octal value (no leading 0)
+%p	Memory location or address in hexadecimal (pointer)
+%s	String constant or variable (char *)
+%u	Unsigned integer (unsigned int, unsigned short int, unsigned long int) value
+%x	Unsigned hexadecimal value, lowercase a–f, no leading 0 or x
+%X	Unsigned hexadecimal value, uppercase A–F, no leading 0 or X
+
+
+Function Calls and the Stack
+
+Functions are adressed by pointers.
+
+char* foo()
+    return 'bar';
+
+int main()
+    char* ptr;
+    ptr = foo;
+    ptr();
+
+But how does it know the size of the function? It doesn't! The parenthesis put the functions address into EIP (Extended Instruction Pointer), which executes until return is reached.
+
+What else can we do?
+Remember, a pointer is nothing but a LONG type
+
+int main()
+	long ptr;
+	ptr = &foo;
+	printf(“whats at foo? Its: %s”, (char*) ptr);
+
+
+So let's review on everything we learned in this section about pointers.
+- A variable is a memory address.
+- A pointer is a variable that stores a memory address.
+- A pointer is simply a long.
+- Pointers can be used to dive deeper into the 
+
+-------------------------------------------------------------------------------------
+WEB APP SECTION
+
+Logic Flaws
+- Let me ask you this:
+    + You have a banking application where you can transfer money. What happens if you try transfering -1
+- What is a logic Flaw 
+    + A problem where the application does not behave as expected from a given state
+    + When an expected workflow can be avoided/circumvented
+    + When a developer has not considered external influences to the current execution path
+- Software Lines of Code
+    Mars Curiosity Rover 5 million
+    Boeing 787 6.5 million
+    Firefox Browser 9.7 million
+    Android 12 million
+    Windows 7 40 million (in 2009)
+    Facebook 62 million
+    Mac OS X 10.4 86 million
+    Healthcare.gov 500 million
+- Back to previous example
+    + of -1 gets escaped, we can try bypassing client side filters using javascript
+
+
+Browser Behavior
+Certificates
+    + Who knows what SSL certificates are?
+    + Ok who knows what the difference between HTTP and HTTPS is?
+        - HTTPS is HTTP with TLS encryption. HTTPS uses TLS (SSL) to encrypt normal HTTP requests and responses, making it safer and more secure. A website that uses HTTPS has https:// in the beginning of its URL instead of http://, like https://www.cloudflare.com.
+        - SSL Certificates are small data files that digitally bind a cryptographic key to an organization’s details. When installed on a web server, it activates the padlock and the https protocol and allows secure connections from a web server to a browser. Typically, SSL is used to secure credit card transactions, data transfer and logins, and more recently is becoming the norm when securing browsing of social media sites.
+    + Why use them?
+        Keeps data secure between servers
+        Increases your Google Rankings
+        Builds/Enhances customer trust
+        Improves conversion rates
+    + Where can we check them?
+        - Chrome top left corner
+        - Firefox same as chrome
+        - IE (not that you should be using IE for anything) padlock in URL bar
+
+Local File Inclusion Vulnerability
+- We come across file inclusions on websites a lot.
+    + Sending emails
+    + Uploading Resumes
+    + Any other upload really
+- What if we upload a .php file, or a .js file instead?
+    + You will be surprised how many websites won't check that you have uploaded something with the wrong extension -- but thats not that important.
+- What is a Local File Inclusion Vulnerability?
+    + If the file is read on the website and is not sent, but rather read, an injection can happen.
+    + File can be uploaded with a spoofed extension (.doc, .pdf) but actually hold injection code.
+
+
+Path traversal and XSS
+
+- A path traversal attack (also known as directory traversal) aims to access files and directories that are stored outside the web root folder. By manipulating variables that reference files with “dot-dot-slash (../)” sequences and its variations or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system including application source code or configuration and critical system files.
+- Cross-site scripting (XSS) is a type of computer security vulnerability typically found in web applications. XSS enables attackers to inject client-side scripts into web pages viewed by other users. A cross-site scripting vulnerability may be used by attackers to bypass access controls such as the same-origin policy.
+
+
+https://xss-game.appspot.com
+
