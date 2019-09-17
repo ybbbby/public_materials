@@ -14,6 +14,8 @@ Conclusion: A pointer is a special datatype
 What (native) data types do we know?
 What size do these data types have?
 
+To compile C file run following command:
+gcc -Wall <filename>.c -o <executable-name>
 
 Sample 1:
 #include <stdio.h>
@@ -25,7 +27,7 @@ int main(){
 
 Back to pointers, how long is a pointer?
 Hint: how LONG is a pointer?
-=> A pointer is a LONG (4 bytes on 32bit architectures)
+=> A pointer is a LONG
 
 Sample 2:
 #include <stdio.h>
