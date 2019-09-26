@@ -6,8 +6,8 @@ We try different inputs to do so. Specifically, we are interested in *long* inpu
 
 How do we get long input in to our program?
 Scripting languages like PERL (comes with all Linux distros) or Python (yes, you should know Python) can help you to a) craft long inputs and b) compose hex values.
-'perl -e 'print "A"x200''
-'python -c 'print("asd"*200)'
+`perl -e 'print "A"x200'`
+`python -c 'print("asd"*200)`
 
 Furhter, |, < and the expression evaluator $() can be used to combine commands.
 We want to provide input via command line arguments, or STDIN.
